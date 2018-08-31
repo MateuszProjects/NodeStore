@@ -8,9 +8,11 @@ var expressHbs = require('express-handlebars');
 var bodyParser = require('body-parser');
 var passport = require('passport');
 var session = require('express-session');
+var models = require('./models');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+
 
 var app = express();
 
