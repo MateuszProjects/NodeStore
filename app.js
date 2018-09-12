@@ -6,25 +6,37 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var expressHbs = require('express-handlebars');
 var bodyParser = require('body-parser');
-var passport = require('passport');
+var flash = require('connect-flash');
 var session = require('express-session');
-var models = require('./models');
-
+var passport = require('passport');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-
 
 var app = express();
 
 // view engine setup
 app.engine('.hbs', expressHbs({defaultLayout: 'layout', extname: '.hbs'}));
 app.set('view engine', '.hbs');
-
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(flash());
 app.use(cookieParser());
+// session
+app.use(session({
+  name: 'JSESSION',
+  secret: 'MYSECRETISVERYSECRET',
+  // store: store,
+  resave: true,
+  saveUninitialized: true,
+  cookie: {
+    maxAge: 180 * 60 * 100
+  }
+}));
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
+
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

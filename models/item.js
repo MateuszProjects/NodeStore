@@ -1,19 +1,19 @@
 module.exports = function(sequelize, DataType){
-    const Account = sequelize.define('account',  {
+    const Item  = sequelize.define('item',  {
         id: {
             autoIncrement: true, 
             primaryKey: true,
             type: DataType.INTEGER
-        },
-        prokuct: {
+        },        
+        title: {
             type: DataType.STRING
         },
-        quantity: {
-            type: DataType.INTEGER
+        value: {
+            type: DataType.FLOAT(11)
         },
-        price: {
+        imagePath: {
             type: DataType.STRING
         }
     });
-    return Account;
+    return Item;
 }

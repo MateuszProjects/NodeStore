@@ -4,6 +4,18 @@ module.exports = function(sequelize, DataType){
             autoIncrement: true, 
             primaryKey: true,
             type: DataType.INTEGER
+        },        
+        name: {
+            type: DataType.STRING
+        },
+        surname: {
+            type: DataType.STRING
+        },
+        login: {
+            type: DataType.STRING
+        },
+        password: {
+            type: DataType.STRING
         }
   });
 
@@ -11,7 +23,7 @@ module.exports = function(sequelize, DataType){
       User.hasMany(models.account, {
         foreginKey: 'accountId'
       });
-      User.hasMany(models.shopmodel, {
+      User.hasMany(models.item, {
         foreginKey: 'shopId'
       });
   };
